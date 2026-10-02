@@ -1,0 +1,65 @@
+# Secrets (commit .env.example only)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+.next/
+out/
+.turbo/
+.vercel/
+*.tsbuildinfo
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+# Data and models (keep generators and small samples, not big outputs)
+data/raw/
+data/generated/
+*.parquet
+*.db
+*.sqlite3
+models/*.pkl
+models/*.joblib
+models/*.pt
+models/*.onnx
+mlruns/
+wandb/
+
+# Submission media (upload these, don't commit)
+*.mp4
+*.mov
+*.mkv
+
+# OS and editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# Logs
+logs/
+*.log
+
+# Local AI tool state
+.claude/settings.local.json

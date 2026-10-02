@@ -54,6 +54,24 @@ Not wanted: a generic chatbot, a plain dashboard, or just a model accuracy score
 - No AI co-author lines or "Generated with" footers in commits or PRs.
 - Never commit secrets. Use `.env` locally and keep `.env.example` with placeholders.
 
+## Stack and layout
+
+| Folder | What | Run |
+|---|---|---|
+| `backend/` | Python 3.13, FastAPI. All logic, ML and LLM calls live here. Routes start with `/api`. | `uvicorn app.main:app --reload` (port 8000) |
+| `frontend/` | Next.js 16 App Router, React 19, Tailwind 4, pnpm. Screens only. | `pnpm dev` (port 3000) |
+
+- Next.js forwards `/api/*` to FastAPI (`frontend/next.config.ts`, env `BACKEND_URL`). Call the backend with relative `fetch("/api/...")`. Never add CORS.
+- Do not add Next.js API routes or server actions. Business logic belongs in FastAPI.
+- Pages that use state or events start with `"use client"`.
+- Next.js 16 differs from older versions. Read `frontend/AGENTS.md` and the docs in `frontend/node_modules/next/dist/docs/` before writing frontend code.
+- Tests: `pytest` in `backend/`. `pnpm lint` and `pnpm exec tsc --noEmit` in `frontend/`.
+
+## Workflow
+
+- `main` is protected. Work on a branch, open a PR, merge it. No direct pushes.
+- Branch names follow the commit types: `feat/...`, `fix/...`, `chore/...`, `docs/...`.
+
 ## Status
 
-Setup only. Track, idea and stack are not chosen yet. Update this file when they are.
+Project skeleton is done. Track and idea are not chosen yet. Update this file when they are.

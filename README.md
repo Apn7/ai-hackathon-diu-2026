@@ -20,37 +20,71 @@ _TBD: list each feature and say how the AI part is used._
 
 | Layer | Tools |
 |---|---|
-| Languages | _TBD_ |
-| Frameworks | _TBD_ |
+| Languages | Python 3.13, TypeScript |
+| Backend | FastAPI, Uvicorn |
+| Frontend | Next.js 16 (App Router), React 19, Tailwind CSS 4 |
 | AI models / APIs | _TBD_ |
 | Libraries | _TBD_ |
-| Services / hosting | _TBD_ |
+| Testing | pytest, ESLint, TypeScript compiler |
+| Hosting | Vercel (frontend), _TBD_ (backend) |
 
 ## Requirements
 
-_TBD: software versions, hardware, accounts needed._
+- Python 3.13
+- Node.js 20.9 or newer (tested on 24)
+- pnpm (tested on 12)
 
 ## Installation and Setup
 
 ```bash
-git clone <repo-url>
-cd <repo>
-# TBD
+git clone https://github.com/Apn7/ai-hackathon-diu-2026.git
+cd ai-hackathon-diu-2026
+
+# Backend
+cd backend
+python -m venv .venv
+.venv\Scripts\activate        # macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+cd ..
+
+# Frontend
+cd frontend
+pnpm install
+cd ..
 ```
 
 ## Environment Variables
 
-Copy `.env.example` to `.env` and fill in the values. Never commit `.env`.
+None are needed to run locally.
 
-| Variable | Purpose | Example |
-|---|---|---|
-| _TBD_ | _TBD_ | `your-key-here` |
+| Variable | Where | Purpose | Example |
+|---|---|---|---|
+| `BACKEND_URL` | frontend (Vercel) | Where Next.js forwards `/api/*` calls. Defaults to `http://localhost:8000`. | `https://your-backend.example.com` |
 
 ## Run and Build
 
+Run each in its own terminal, then open http://localhost:3000.
+
 ```bash
-# TBD
+# Terminal 1: backend on http://localhost:8000 (API docs at /docs)
+cd backend
+.venv\Scripts\activate
+uvicorn app.main:app --reload
+
+# Terminal 2: frontend on http://localhost:3000
+cd frontend
+pnpm dev
 ```
+
+Production build of the frontend:
+
+```bash
+cd frontend
+pnpm build
+pnpm start
+```
+
+The frontend forwards every `/api/*` request to the backend, so the browser only talks to one address.
 
 ## Live Deployment
 
@@ -59,8 +93,17 @@ _TBD: link judges can open._
 ## Testing
 
 ```bash
-# TBD
+# Backend tests
+cd backend
+pytest
+
+# Frontend lint and type check
+cd frontend
+pnpm lint
+pnpm exec tsc --noEmit
 ```
+
+Quick manual check: with both servers running, http://localhost:3000 shows "API status: ok".
 
 _TBD: how to verify each feature by hand too._
 
